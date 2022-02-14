@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Admin</title>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="head">
+			<div class="container">
+				<section class="header">
+					<a href="#" class="header__logo">indexedDB</a>
+					<div class="header__menu">
+						<a class="header__curr-user" href="./main.html">Exit</a>
+					</div>
+				</section>
+			</div>
+		</header>
+		<main class="main">
+			<div class="alert-sms"></div>
+			<div class="container">
+				<div class="add-card">
+					<div class="add-card__item">
+						<label class="add-card__lbl" for="inpTitle">Enter brand</label>
+						<input class="add-card__inp" type="text" name="inpTitle" id="inpTitle" required>
+					</div>
+					<div class="add-card__item">
+						<label class="add-card__lbl" for="inpImg">image only url</label>
+						<input class="add-card__inp" type="text" name="inpImg" id="inpImg" required>
+					</div>
+					<div class="add-card__item">
+						<label class="add-card__lbl" for="inpPrice">price</label>
+						<input class="add-card__inp" type="text" name="inpPrice" id="inpPrice" required>
+					</div>
+					<div class="add-card__item">
+						<label class="add-card__lbl" for="inpModel">model</label>
+						<input class="add-card__inp" type="text" name="inpModel" id="inpModel" required>
+					</div>
+					<div class="add-card__item">
+						<label class="add-card__lbl" for="inpMemory">memory</label>
+						<input class="add-card__inp" type="text" name="inpMemory" id="inpMemory" required>
+					</div>
+					<div class="add-card__bttm">
+						<button class="add-card__btn">Add</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script src="../js/AddCard.js" type="module"></script>
+</body>
+</html>

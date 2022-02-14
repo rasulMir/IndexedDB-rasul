@@ -6,24 +6,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 	<link rel="stylesheet" href="./css/style.css">
-	<title>IndexedDB</title>
+	<title>Authorization</title>
 </head>
 <body>
-	<div class="wrapper">
-		<form id="authorization">
-			<label for="userLogin" class="authorization__lbls authorization__login">
-				Please enter your login or name.
-				<input type="text" name="userLogin" id="userLogin" placeholder="Login..." required>
+	<div class="modal-wrapper">
+		<form id="authorization" class="modal">
+			<div class="modal-error"></div>
+			<label for="userLogin" class="modal__lbls authorization__lbl-login">
+				<div class="modal__txt">login or name.</div>
+				<input class="modal__inps authorization__inp-login" type="text" name="userLogin" id="userLogin" placeholder="Login..." required>
 			</label>
-			<label for="userPass" class="authorization__lbls authorization__pass">
-				Please enter your Password.
-				<input type="password" name="userPass" id="userPass" placeholder="Password..." required>
+			<label for="userPass" class="modal__lbls authorization__lbl-pass">
+				<div class="modal__txt">Password.</div>
+				<input class="modal__inps authorization__inp-pass" type="password" name="userPass" id="userPass" placeholder="Password..." required>
 			</label>
-			<div class="custom-chbx-wrap">
-				<label for="chbxShowPass"></label>
-				
+			<div class="custom-chbx">
+				<label class="custom-chbx__lbl" for="chbxShowPass">
+					<input class="custom-chbx__chbx" type="checkbox" name="chbxShowPass" id="chbxShowPass">
+					<span class="custom-chbx__lbl_circle"></span>
+				</label>
+				<div class="custom-chbx__lbl_text">Show Password</div>
+			</div>
+			<div class="authorization__btns btns">
+				<button class="authorization__registr-btn btns__registr btns__btn" type="button">Registration</button>
+				<button class="authorization__submit-btn btns__submit btns__btn" type="button">Submit</button>
 			</div>
 		</form>
 	</div>
+
+	<script src="./js/Auth.js" type="module"></script>
 </body>
 </html>
