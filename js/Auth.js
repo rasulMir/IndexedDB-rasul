@@ -1,9 +1,8 @@
 import Base from "./Base.js";
-import {db} from "./Base.js";
 
 class Auth extends Base {
-	constructor(data) {
-		super(data);
+	constructor() {
+		super();
 		this.AuthInitDOM();
 		this.AuthInit();
 	}
@@ -11,26 +10,48 @@ class Auth extends Base {
 	submitHandler = (e) => {
 		if (e.target.closest('.btns__submit') || e.code === 'Enter') {
 			let pass = this.inpPass.value;
-
-			let onSucces = (currLogin, trans) => {
-				if (currLogin.result) {
-					let currLog = currLogin.result.login;
-					let currPass = currLogin.result.pass;
-					if (currLog && currPass === pass) {
-						currLogin.result.current = 'true';
-						let req = trans.put(currLogin.result);
-						req.onsuccess = () => this.redirect('./html/main.html');
-						req.onerror = (e) => console.log(e.target.error);
-					}	else {
-						this.modalError.textContent = 'uncorrect login or password';
+			let upgrade = (e) => console.log('Upgraded', e.target.result);
+			let requestSuccess = (e) => {
+				let res = e.target.result;
+				let transaction = res.transaction('users', 'readwrite')
+														.objectStore('users');
+				let log = transaction.get(this.inpLog.value);
+				
+				log.addEventListener('success', (e) => {
+					let currUser = e.target;
+					if (currUser.result) {
+						if (pass === currUser.result.pass) {
+							currUser.result.current = 'true';
+							let req = transaction.put(currUser.result);
+							this.redirect('./html/main.html');
+						} else {
+							this.modalError.textContent = 'uncorrect paswword';
+						}
+					} else {
+						this.modalError.textContent = 'uncorrect login';
 					}
-				}	else {
-					this.modalError.textContent = 'fill in these fields';
-				}
+				});
+				log.addEventListener('error', (e) => console.log(e.target.result));
 			}	
-			this.transactionDB(db.users, "users", "readwrite", this.inpLog.value, onSucces);
 			this.modalError.textContent = '';
+			this.requestDB('users', 1, upgrade, requestSuccess);
 		} else return;
+	}
+
+	currentFalseAll = async () => {
+		let upgrade = (e) => console.log(e.target.result, 'Upgraded');
+		let requestSuccess = (e) => {
+			let transaction = e.target.result.transaction('users', 'readwrite')
+																				.objectStore('users');
+			let users = transaction.getAll();
+			this.eventListeners(users, (e) => {
+				e.target.result.forEach(user => {
+					user.current = false;
+					transaction.put(user);
+				});
+			});
+		}
+		this.requestDB('users', 1, upgrade, requestSuccess);
 	}
 
 	keyDownHandler = async (e) => {
@@ -47,17 +68,14 @@ class Auth extends Base {
 	}
 
 	async AuthInit() {
-		this.BaseInit();
+		let a = await this.currentFalseAll();
 		document.addEventListener('click', event => {
 			this.showPass(this.inpPass, this.inpChbx);
 			this.submitHandler(event);
 		});
 		document.addEventListener('keydown', this.keyDownHandler);
+		this.btnRegistr.addEventListener('click', () => this.redirect("./html/registr.html"));
 	}
 }
 
-new Auth([
-	{login: 'rasul', pass: '12345', current: false, isAdmin: 'true'},
-	{login: 'zhenya', pass: '12345', current: false, isAdmin: false},
-	{login: 'alisher', pass: '12345', current: false, isAdmin: false},
-]);
+new Auth;

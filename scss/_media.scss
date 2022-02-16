@@ -4,10 +4,44 @@
 	}
 	.phone-card {
 		flex: 0 0 320px;
+		// .phone-card__title
+		&__title {
+			font-size: 1.8rem;
+		}
 	}
 	.add-card {
 		&__item {
 			flex: 0 0 430px;
+		}
+	}
+	.busket {
+		align-items: center;
+		// .busket__item
+		&__item {
+			width: 434px;
+		}
+
+		// .busket__info
+		&__info {
+			font-size: 1.8rem;
+		}
+
+		// .busket__btn-del
+		&__btn-del {
+			font-size: 2rem;
+		}
+
+		&__bttm-total {
+			justify-content: center;
+			font-size: 2rem;
+
+			& * {
+				padding: 0 1rem;
+			}
+	
+			& * > span {
+				margin: 0 .5rem 0 0;
+			}
 		}
 	}
 }
@@ -32,6 +66,21 @@
 			font-size: 1.8rem;
 		}
 	}
+	.busket {
+		// .busket__list
+		&__list {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1.5rem 0;
+		}
+		// .busket__item
+		&__item {
+			flex: 0 0 49%;
+		}
+	}
 	.custom-chbx {
 		font-size: 1.8rem;
 	}
@@ -49,16 +98,21 @@
 
 		// .header__menu
 		&__menu {
-			flex: 0 0 30%;
+			flex: 0 0 50%;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
+			&_alone {
+				justify-content: flex-end;
+				cursor: pointer;
+			}
 		}
 
 		// .header__curr-user
 		&__curr-user {
 			border: none;
-			cursor: auto;
+			cursor: pointer;
 			&::before {
 				display: none;
 			}
@@ -76,7 +130,7 @@
 			height: auto;
 			display: flex;
 			justify-content: space-around;
-			align-items: center;
+			align-items: flex-start;
 			background-color: transparent;
 
 			&_exit {
@@ -122,6 +176,18 @@
 		justify-content: space-between;
 		&__item {
 			flex: 0 0 19%;
+		}
+	}
+
+	.busket {
+		// .busket__list
+		&__list {
+			padding: 1.5rem 0;
+		}
+		// .busket__item
+		&__item {
+			flex: 0 0 30%;
+			margin: 0 0 1.5rem 0;
 		}
 	}
 }

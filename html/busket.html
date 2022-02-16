@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<title>main</title>
+	<title>Admin</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -14,30 +14,27 @@
 			<div class="container">
 				<section class="header">
 					<a href="#" class="header__logo">indexedDB</a>
-					<div class="header__menu">
-						<div class="header__curr-user"></div>
-						<ul class="header__menu-list">
-							<li class="header__menu-list_exit">
-								<span></span>
-							</li>
-							<li class="header__item">
-								<a href="./busket.html" class="header__item-link">Busket</a>
-							</li>
-							<li class="header__item">
-								<a href="../index.html" class="header__item-link">logout</a>
-							</li>
-						</ul>
+					<div class="header__menu header__menu_alone">
+						<a class="header__curr-user" href="./main.html">Exit</a>
 					</div>
 				</section>
 			</div>
 		</header>
 		<main class="main">
+			<div class="alert-sms"></div>
 			<div class="container">
-				<section class="main-body">
-				</section>
+				<div class="busket">
+					<ul class="busket__list">
+					</ul>
+					<div class="busket__bttm-total">
+						<div class="busket__total"></div>
+						<div class="busket__summ"></div>
+					</div>
+				</div>
 			</div>
 		</main>
 	</div>
-	<script src="../js/main.js" type="module"></script>
+
+	<script src="../js/Busket.js" type="module"></script>
 </body>
 </html>

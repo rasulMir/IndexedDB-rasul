@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Authorization</title>
+</head>
+<body>
+	<div class="modal-wrapper">
+		<form id="authorization" class="modal">
+			<div class="modal-error"></div>
+			<label for="userLogin" class="modal__lbls authorization__lbl-login">
+				<div class="modal__txt">Create a username.</div>
+				<input class="modal__inps authorization__inp-login" type="text" name="userLogin" id="userLogin" placeholder="Username..." required>
+			</label>
+			<label for="userPass" class="modal__lbls authorization__lbl-pass">
+				<div class="modal__txt">Create a Password.</div>
+				<input class="modal__inps authorization__inp-pass" type="password" name="userPass" id="userPass" placeholder="Password..." required>
+			</label>
+			<label for="userPass2" class="modal__lbls authorization__lbl-pass">
+				<div class="modal__txt">repeat the Password.</div>
+				<input class="modal__inps authorization__inp-pass" type="password" name="userPass" id="userPass2" placeholder="Password Repeat..." required>
+			</label>
+			<div class="custom-chbx">
+				<label class="custom-chbx__lbl" for="chbxShowPass">
+					<input class="custom-chbx__chbx" type="checkbox" name="chbxShowPass" id="chbxShowPass">
+					<span class="custom-chbx__lbl_circle"></span>
+				</label>
+				<div class="custom-chbx__lbl_text">Show Password</div>
+			</div>
+			<div class="authorization__btns btns">
+				<button class="authorization__registr-btn btns__registr btns__btn" type="button">Exit</button>
+				<button class="authorization__submit-btn btns__submit btns__btn" type="button">Add</button>
+			</div>
+		</form>
+	</div>
+
+	<script src="../js/Registr.js" type="module"></script>
+</body>
+</html>

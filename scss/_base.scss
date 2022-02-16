@@ -241,6 +241,7 @@
 
 	// .header__item
 	&__item {
+		text-transform: capitalize;
 		&:not(:last-child) {
 			margin: 0 0 1rem 0;
 		}
@@ -325,6 +326,7 @@
 	// .phone-card__memory
 	&__memory {
 	}
+
 }
 .add-card {
 	padding: 1.5rem;
@@ -390,4 +392,141 @@
 	font-size: 1.8rem;
 	text-align: center;
 	text-transform: capitalize;
+}
+
+.wrapper {
+}
+.head {
+}
+.container {
+}
+.header {
+
+		// .header__logo
+
+		&__logo {
+		}
+
+		// .header__menu
+
+		&__menu {
+		}
+
+		// .header__curr-user
+
+		&__curr-user {
+		}
+}
+.main {
+}
+.alert-sms {
+}
+.busket {
+
+	// .busket__list
+	&__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1rem 0 0 0;
+	}
+
+	// .busket__item
+	&__item {
+		width: 100%;
+		display: flex;
+		align-items: stretch;
+		text-transform: capitalize;
+		background-color: rgba(150, 150, 150, 0.74);
+		border: .1rem solid $white;
+		margin: 0 0 1rem 0;
+	}
+
+	// .busket__title
+	&__title {
+		padding: 1rem 0 0 0;
+		margin: 0 0 1rem 0;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	// .busket__img
+	&__img {
+		flex: 0 0 35%;
+		position: relative;
+		& > img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__body {
+		flex: 1 0;
+	}
+
+	// .busket__info
+	&__info {
+		margin: 0 0 1.5rem 0;
+		padding: .5rem;
+		font-size: 1.4rem;
+
+		& * {
+			margin: 0 0 .5rem 0;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+
+	// .busket__price
+	&__price {
+	}
+
+	// .busket__model
+	&__model {
+	}
+
+	// .busket__memory
+	&__memory {
+	}
+
+	// .busket__bttm
+	&__bttm {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: .5rem;
+	}
+
+	// .busket__btn-del
+	&__btn-del {
+		padding: .3em 1em;
+		font-size: 1.6rem;
+		color: $white;
+		border-radius: .3em;
+		transition: all .2s linear;
+		background-color: rgb(194, 31, 31);
+		&:hover {
+			box-shadow: 0 0 .5em .5em rgba(194, 31, 31, 0.479);
+		}
+	}
+
+	&__bttm-total {
+		font-size: 1.6rem;
+		padding: 1rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		text-transform: capitalize;
+
+		& * > span {
+			text-align: left;
+			color: #5c5c5c;
+			margin: 0 .3rem 0 0;
+		}
+	}
 }

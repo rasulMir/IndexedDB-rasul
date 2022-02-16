@@ -1,11 +1,9 @@
-export const db = {
-	users : null,
-	busket : null,
-}
+import {users} from "./data.js";
+import {phoneCards} from "./data.js";
 class Base {
-	static usersDB;
-	constructor(data) {
-		this.data = data;
+	constructor() {
+		this.users = users;
+		this.phoneCards = phoneCards;
 	}
 
 	addRemoveClass(select, className) {
@@ -25,23 +23,17 @@ class Base {
 	}
 
 	showPass = (inp, chbx) => inp.type = (chbx.checked) ? 'text' : 'password';
-
-	onUpgradeHandler = (e) => {
-		db.users = e.target.result;
-		if (!db.users.objectStoreNames.contains('users')) {
-			let users = db.users.createObjectStore("users", {keyPath: 'login'});
-			let index = users.createIndex('currentUser', 'current');
-			let isAdmin = users.createIndex('isAdmin', 'isAdmin');
-		} else return;
+	
+	requestDB = async (dbName, version, upgrade, succes) => {
+		let request = indexedDB.open(dbName, version);
+		request.addEventListener('error', (e) =>	console.log(e.target.error, 'Error'));
+		request.addEventListener('upgradeneeded', upgrade);
+		request.addEventListener('success', succes);
 	}
 
-	transactionDB(DB, dbName, method, login, cb) {
-
-		let transaction = DB.transaction(dbName, method)
-												.objectStore(dbName);
-		let currLogin = transaction.get(login);
-		currLogin.addEventListener('success', () => cb(currLogin, transaction));
-		currLogin.addEventListener('error', (e) => console.log(e.target.error));
+	eventListeners(current, cb) {
+		current.addEventListener('success', cb);
+		current.addEventListener('error', (e) => console.log(e.target.error));
 	}
 
 	addNotes = (db, objectStore, obj) => {
@@ -52,23 +44,39 @@ class Base {
 		users.onerror = (e) => console.log("Ошибка", e.target.error);
 	}
 
-	onsuccesUsersHandler = (e) => {
-		db.users = e.target.result;
-		this.data.forEach(e => this.addNotes(db.users, "users", e));
+	onSuccesUsersHandler = (e) => {
+		let users = e.target.result;
+		this.users.forEach(e => this.addNotes(users, "users", e));
 	}
 
-	createUsersDB = () => {
-		indexedDB.deleteDatabase('users');
-		let request = indexedDB.open('users', 1);
-		request.addEventListener('error', (e) =>	console.log(e.target.error, 'Error'));
-		request.addEventListener('upgradeneeded', this.onUpgradeHandler);
-		request.addEventListener('success', this.onsuccesUsersHandler);
+	onUpgradeUsersHandler = (e) => {
+		let usersDB = e.target.result;
+		if (!usersDB.objectStoreNames.contains('users')) {
+			let users = usersDB.createObjectStore("users", {keyPath: 'login'});
+			users.createIndex('currentUser', 'current');
+			users.createIndex('isAdmin', 'isAdmin');
+		} else return;
+	}
+
+	onUpgradePhoneCardsHandler = (e) => {
+		let phoneCards = e.target.result;
+		if (!phoneCards.objectStoreNames.contains('phoneCards')) {
+			phoneCards.createObjectStore("phoneCards", {keyPath: 'id'});
+		} else return;
+	}
+
+	onSuccesPhoneCardsHandler = (e) => {
+		let phoneCards = e.target.result;
+		this.phoneCards.forEach(e => this.addNotes(phoneCards, "phoneCards", e));
 	}
 
 	BaseInit = () => {
-		this.createUsersDB();
+		this.requestDB('users', 1, this.onUpgradeUsersHandler, this.onSuccesUsersHandler);
+		this.requestDB('phoneCards', 1, this.onUpgradePhoneCardsHandler, this.onSuccesPhoneCardsHandler);
 		document.addEventListener('error', (e) => console.log(e.target.error));
 	}
 }
+
+new Base().BaseInit();
 
 export default Base;

@@ -18,28 +18,28 @@ class AddCard extends Base {
 	}
 	
 	btnHandler = () => {
-		let card;
 		this.alertSms.textContent = '';
 		if (this.inpTitle.value && this.inpImg.value 
 				&& this.inpPrice.value && this.inpModel.value && this.inpMemory.value) {
-			card = {
-				title : this.inpTitle.value,
-				img : this.inpImg.value, 
-				price: this.inpPrice.value, 
-				model:	this.inpModel.value, 
-				memory: this.inpMemory.value,
+			let reqUpgrade = (e) => console.log(e.target.result, 'upgraded');
+			let reqSucces = (e) => {
+				let res = e.target.result;
+				let cards = res.transaction('phoneCards', "readwrite")
+							.objectStore('phoneCards');
+				let request = cards.getAll();
+				this.eventListeners(request, e => {
+					let card = {
+						id : e.target.result.length + 1,
+						title : this.inpTitle.value,
+						img : this.inpImg.value, 
+						price: this.inpPrice.value, 
+						model:	this.inpModel.value, 
+						memory: this.inpMemory.value,
+					}
+					this.addNotes(res, 'phoneCards', card);
+				});
 			}
-
-			let request = indexedDB.open('busket', 1);
-			request.addEventListener('error', (e) =>	console.log(e.target.error, 'Error'));
-			request.addEventListener('upgradeneeded', () => {
-				console.log('upgraded');
-			});
-			request.addEventListener('success', (e) => {
-				this.addNotes(e.target.result, 'busket', card);
-				console.log('added');
-			});
-
+			this.requestDB('phoneCards', 1, reqUpgrade, reqSucces);
 		} else {
 			this.alertSms.textContent = 'Fill in these fields';
 		}
